@@ -12,24 +12,16 @@ It is a portfolio project tailored to demonstrate PHP/Symfony, Next.js, workflow
 
 ## Run locally
 
-Start the API in one terminal:
+With Docker Desktop running, start the full development environment with one command:
 
 ```sh
-cd backend
-php -S 127.0.0.1:8000 -t public
+./start-dev.sh
 ```
 
-Start the operator dashboard in another terminal:
-
-```sh
-cd frontend
-bun run dev
-```
-
-Open `http://localhost:3000`. The dashboard calls Symfony directly at `http://127.0.0.1:8000/api/v1/dashboard` by default. Override this with `NEXT_PUBLIC_API_ORIGIN` when required.
+This starts the frontend, Symfony API, PostgreSQL and Redis. Source folders are bind-mounted, so Next.js Fast Refresh and Symfony development mode apply your saved changes without restarting containers. Open `http://localhost:3000` when the services are ready.
 
 ## Current slice
 
 The initial vertical slice exposes a Symfony dashboard endpoint and an accessible Next.js dashboard showing exception work, workflow health and an exception queue. It intentionally uses synthetic data while the PostgreSQL persistence and Symfony Messenger work are built next.
 
-Read [the product plan](PROJECT_PLAN.md), [error-handling approach](docs/error-handling.md), and [contribution expectations](CONTRIBUTING.md).
+Read [the product plan](PROJECT_PLAN.md), [local development guide](docs/local-development.md), [error-handling approach](docs/error-handling.md), and [contribution expectations](CONTRIBUTING.md).
