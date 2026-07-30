@@ -46,6 +46,17 @@
   --color-deep-crimson-800: rgb(98 4 12);
   --color-deep-crimson-900: rgb(49 2 6);
   --color-deep-crimson-950: rgb(34 1 4);
+  --color-review-yellow-50: rgb(255 251 235);
+  --color-review-yellow-100: rgb(254 243 199);
+  --color-review-yellow-200: rgb(253 230 138);
+  --color-review-yellow-300: rgb(252 211 77);
+  --color-review-yellow-400: rgb(251 191 36);
+  --color-review-yellow-500: rgb(245 158 11);
+  --color-review-yellow-600: rgb(217 119 6);
+  --color-review-yellow-700: rgb(180 83 9);
+  --color-review-yellow-800: rgb(146 64 14);
+  --color-review-yellow-900: rgb(120 53 15);
+  --color-review-yellow-950: rgb(69 26 3);
   --color-dim-grey-50: rgb(242 242 243);
   --color-dim-grey-100: rgb(228 230 231);
   --color-dim-grey-200: rgb(202 205 206);
@@ -78,4 +89,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.action-btn-div button {
+  cursor: pointer;
 }

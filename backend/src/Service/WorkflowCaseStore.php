@@ -33,6 +33,13 @@ final class WorkflowCaseStore
         return $this->cases($session)[$caseId] ?? null;
     }
 
+    public function reset(SessionInterface $session): array
+    {
+        $session->remove(self::SESSION_CASES_KEY);
+
+        return $this->dashboard($session);
+    }
+
     public function action(SessionInterface $session, string $caseId, string $action, string $note, array $actor): array
     {
         $cases = $this->cases($session);
@@ -83,9 +90,14 @@ final class WorkflowCaseStore
         $now = new \DateTimeImmutable();
         $seedCases = [
             'CS-1042' => $this->case('CS-1042', 'Missing policy number', 'Harper & Co', 'Repair request intake', 'Required evidence is missing from the email and attachment.', 'High', 'Unassigned', '18 minutes', 'Awaiting review', '0.64', 'Policy number was not found in the submitted document.', $now->modify('-18 minutes')),
+            'CS-1041' => $this->case('CS-1041', 'Duplicate claim reference', 'Marlow Motors', 'Document intake', 'Two incoming documents match the same claim reference and need a reviewer decision.', 'Medium', 'Richard Waters', '31 minutes', 'Pending review', '0.71', 'The claim reference CS-88291 appears in two documents submitted within four minutes.', $now->modify('-31 minutes')),
             'CS-1039' => $this->case('CS-1039', 'Approval threshold exceeded', 'Northstar Insurance', 'Estimate validation', 'Estimated repair value exceeds the configured approval threshold.', 'High', 'Maya Singh', '42 minutes', 'Awaiting decision', '0.96', 'Estimated repair value is £8,450; the approval threshold is £5,000.', $now->modify('-42 minutes')),
+            'CS-1038' => $this->case('CS-1038', 'Payment authority pending', 'Aster Property Care', 'Estimate validation', 'The estimate is valid but needs delegated authority before the payment step can continue.', 'High', 'Unassigned', '55 minutes', 'Pending approval', '0.93', 'Repair estimate is £6,280 and sits £1,280 above the delegated authority limit.', $now->modify('-55 minutes')),
             'CS-1037' => $this->case('CS-1037', 'Low extraction confidence', 'Wellington Services', 'Document intake', 'The extracted claim reference scored below the human-review threshold.', 'Medium', 'Richard Waters', '1 hour', 'In review', '0.58', 'Claim reference had two competing values in the source document.', $now->modify('-1 hour')),
+            'CS-1036' => $this->case('CS-1036', 'Customer evidence requested', 'Oakwell Housing', 'Repair request intake', 'The customer must provide a clearer photograph of the damage before validation can continue.', 'Medium', 'Richard Waters', '1 hour 25 minutes', 'Awaiting response', '0.78', 'The uploaded photograph is too blurred to confirm the source and extent of the damage.', $now->modify('-85 minutes')),
+            'CS-1035' => $this->case('CS-1035', 'Provider timeout retry', 'Cedar Claims', 'Document intake', 'A verified document is being retried after a transient extraction-provider timeout.', 'Medium', 'Maya Singh', '1 hour 48 minutes', 'Reprocessing', '0.99', 'The source PDF passed validation; only the extraction provider failed to respond within its limit.', $now->modify('-108 minutes')),
             'CS-1034' => $this->case('CS-1034', 'Evidence validated', 'Kingsway Repairs', 'Repair request intake', 'All required fields and policy evidence were validated.', 'Medium', 'Richard Waters', '2 hours', 'Resolved', '0.99', 'Policy evidence, claimant details and estimate were validated.', $now->modify('-2 hours')),
+            'CS-1033' => $this->case('CS-1033', 'Unsupported repair category', 'Beacon Facilities', 'Estimate validation', 'The submitted repair category falls outside the policy scope.', 'High', 'Maya Singh', '2 hours 20 minutes', 'Rejected', '0.97', 'The estimate names commercial resurfacing, which is excluded from the customer policy.', $now->modify('-140 minutes')),
         ];
         $session->set(self::SESSION_CASES_KEY, $seedCases);
 

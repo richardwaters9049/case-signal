@@ -24,6 +24,10 @@ The frontend and backend folders are bind-mounted into their development contain
 
 Symfony runs in the development environment through PHP's built-in server. It loads changed PHP source on the next request, so controller and service edits also do not require a container restart.
 
+## Testing the demonstration data
+
+Sign in with the credentials in the root README. The dashboard has nine synthetic cases spanning yellow pending/review states, a resolved case and a rejected case. Make a decision on any open case, confirm the audit event and metric changes, then use **Reset demo** in the operator panel to restore the original scenarios. Resetting is scoped to the current Symfony session, so it does not affect another browser session.
+
 ## Useful commands
 
 ```sh

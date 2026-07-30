@@ -16,6 +16,8 @@ The API uses `application/problem+json` for errors. A response contains a safe u
 - Repeated requests are rate limited with `429` and clear retry guidance.
 - Unauthenticated dashboard requests return a safe `401` problem response; the frontend returns the operator to the sign-in page without exposing protected case data.
 - Invalid workflow actions, unknown case IDs and attempts to change a closed case return a stable problem response. The API preserves the prior workflow state and records no audit event when an action is rejected.
+- Demonstration-data reset requires an authenticated session. A failed reset leaves the existing session fixture data untouched; the frontend exposes the safe problem detail and keeps the current queue visible.
+- Pending, review, waiting and retry states remain explicit yellow workflow labels. They are operational states, not errors to hide: the case remains queued until a reviewer action or a safe automated retry changes it.
 
 ## Observability
 

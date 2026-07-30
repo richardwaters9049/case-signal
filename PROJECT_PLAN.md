@@ -219,3 +219,7 @@ Write every document in UK English, including spelling such as â€œauthorisationâ
 The project is ready to share when a reviewer can clone it, run it locally with documented commands, and complete the demo journey without external credentials: create a case, see an automation exception, understand why it occurred, make an authorised human decision, inspect the audit trail and observe a failed dependency being retried safely.
 
 The accompanying walkthrough should make three points unmistakable: you can work comfortably in Symfony/PHP, you treat AI as a guarded workflow participant rather than magic, and you ship software with testing, security, observability and collaboration discipline built in.
+
+## 14. Implemented Demonstration Fixtures
+
+The current vertical slice includes nine synthetic, session-backed cases for review, approval, response, retry, resolution and rejection paths. The dashboard uses yellow for any pending, review or waiting state, green for resolved work and red for rejection or risk. Operators can reset the fixture set after an action, making walkthroughs and manual acceptance checks repeatable without affecting another signed-in session.

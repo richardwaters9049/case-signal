@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CaseSignal Frontend
 
-## Getting Started
+The frontend is a Next.js 16 application using TypeScript, Bun, Tailwind CSS and Framer Motion. It is a responsive grid-based operator workspace, with a sign-in landing page and a protected workflow dashboard.
 
-First, run the development server:
+## Development
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Run the whole stack from the repository root:
+
+```sh
+./start-dev.sh
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+For frontend-only commands:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+bun run dev
+bun run lint
+bun run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The Docker environment bind-mounts this folder and enables Fast Refresh, so saved TypeScript, React and CSS changes appear without restarting containers.
 
-## Learn More
+## Behaviour
 
-To learn more about Next.js, take a look at the following resources:
+- The browser calls the Symfony API directly with the authenticated session cookie.
+- The theme initially follows the operating-system preference and can be changed with the inline light/dark toggle. The choice is stored in local storage.
+- Dashboard layouts use CSS Grid at every breakpoint. The operator panel, metrics, queue, workspace and workflow cards reflow rather than relying on fixed widths.
+- Yellow marks pending, review, waiting and safe-retry states; green marks resolved work; red marks rejection and risk.
+- **Reset demo** restores the current operator's synthetic fixture set after a manual workflow test.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Error states
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The client redirects unauthenticated users to sign in, renders API problem details as safe operator-facing messages, disables actions while a request is running and leaves the currently loaded case visible when an action or reset fails. It does not render server stack traces or protected case data after an authentication failure.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See the root [testing guide](../docs/testing.md) for manual checks and the API/error-handling documentation for contract details.

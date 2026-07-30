@@ -4,6 +4,8 @@ Use short-lived feature branches and raise at least one focused pull request eac
 
 Every pull request must explain the problem, implementation approach, test evidence, operational risk, rollback route and documentation changes. Include screenshots or a short recording for user-interface work.
 
+When a pull request changes workflow states, update the fixture table in `docs/api.md`, the manual checks in `docs/testing.md`, and any affected error-handling guidance. Use the local **Reset demo** control before recording test evidence so reviewers can reproduce the same state transitions.
+
 Require one approval before merging. Changes to permissions, workflow transitions or data migrations require a second reviewer where possible. Review correctness, security and privacy impact, accessibility, tests, observability and maintainability. Do not merge with unresolved blocking feedback.
 
 Merging to `main` requires passing CI, review approval and a green deployment smoke check. Hold a brief weekly engineering review to demonstrate progress, review failed-job or error signals, and agree the next milestone.

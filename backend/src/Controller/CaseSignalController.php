@@ -91,6 +91,23 @@ final class CaseSignalController
         return $this->response($this->caseStore->dashboard($request->getSession()));
     }
 
+    #[Route('/api/v1/demo/reset', name: 'api_demo_reset', methods: ['POST', 'OPTIONS'])]
+    public function resetDemo(Request $request): JsonResponse
+    {
+        if ($request->isMethod('OPTIONS')) {
+            return $this->response(null, Response::HTTP_NO_CONTENT);
+        }
+
+        if ($this->authenticatedUser($request->getSession()) === null) {
+            return $this->problem('authentication_required', 'Sign in to reset the demonstration data.', Response::HTTP_UNAUTHORIZED);
+        }
+
+        return $this->response([
+            'message' => 'Demonstration data reset. All sample workflow scenarios are ready to test again.',
+            'dashboard' => $this->caseStore->reset($request->getSession()),
+        ]);
+    }
+
     #[Route('/api/v1/cases/{caseId}', name: 'api_case_detail', methods: ['GET', 'OPTIONS'])]
     public function caseDetail(Request $request, string $caseId): JsonResponse
     {
