@@ -15,6 +15,7 @@ The API uses `application/problem+json` for errors. A response contains a safe u
 - Transient provider, queue, storage and database failures are retried with bounded exponential back-off. Exhausted jobs go to a dead-letter queue and alert the team.
 - Repeated requests are rate limited with `429` and clear retry guidance.
 - Unauthenticated dashboard requests return a safe `401` problem response; the frontend returns the operator to the sign-in page without exposing protected case data.
+- Invalid workflow actions, unknown case IDs and attempts to change a closed case return a stable problem response. The API preserves the prior workflow state and records no audit event when an action is rejected.
 
 ## Observability
 

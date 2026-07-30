@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { apiFetch, responseMessage } from "@/lib/api";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function LoginForm() {
   const router = useRouter();
@@ -47,7 +48,7 @@ export function LoginForm() {
         <section className="relative overflow-hidden bg-dim-grey-900 p-8 text-dim-grey-50 dark:bg-dim-grey-950 sm:p-12">
           <div className="absolute -top-24 -right-12 h-72 w-72 rounded-full bg-pale-slate-400/25 blur-3xl" />
           <div className="absolute -bottom-28 -left-16 h-72 w-72 rounded-full bg-onyx-400/15 blur-3xl" />
-          <div className="relative flex h-full flex-col justify-between">
+          <div className="relative grid h-full grid-rows-[1fr_auto] gap-12">
             <div>
               <p className="text-sm font-semibold tracking-[0.2em] text-pale-slate-200 uppercase">
                 CaseSignal
@@ -67,16 +68,19 @@ export function LoginForm() {
             </div>
           </div>
         </section>
-        <section className="flex items-center p-8 sm:p-12">
+        <section className="grid items-center p-8 sm:p-12">
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.28 }}
             className="mx-auto w-full max-w-sm"
           >
-            <p className="text-sm font-semibold tracking-[0.16em] text-pale-slate-700 uppercase dark:text-pale-slate-300">
-              Operator sign in
-            </p>
+            <div className="grid grid-cols-[1fr_auto] items-center gap-4">
+              <p className="text-sm font-semibold tracking-[0.16em] text-pale-slate-700 uppercase dark:text-pale-slate-300">
+                Operator sign in
+              </p>
+              <ThemeToggle />
+            </div>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight">
               Welcome back
             </h2>

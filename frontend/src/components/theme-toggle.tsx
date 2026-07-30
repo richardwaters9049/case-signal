@@ -21,7 +21,7 @@ function serverTheme(): Theme {
   return "light";
 }
 
-export function ThemeToggle() {
+export function ThemeToggle({ className = "" }: { className?: string }) {
   const theme = useSyncExternalStore(
     subscribeToTheme,
     currentTheme,
@@ -42,7 +42,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="fixed top-5 right-5 z-50 inline-flex items-center gap-2 rounded-full border border-pale-slate-300 bg-pale-slate-50 px-3 py-2 text-sm font-semibold text-dim-grey-800 shadow-lg shadow-dim-grey-950/10 transition hover:cursor-pointer hover:bg-pale-slate-100 focus:outline-none focus:ring-4 focus:ring-pale-slate-300 dark:border-dim-grey-700 dark:bg-dim-grey-900 dark:text-pale-slate-100 dark:shadow-black-cherry-950/30 dark:hover:bg-dim-grey-800 dark:focus:ring-dim-grey-700"
+      className={`inline-flex items-center gap-2 rounded-full border border-pale-slate-300 bg-pale-slate-50 px-3 py-2 text-sm font-semibold text-dim-grey-800 shadow-lg shadow-dim-grey-950/10 transition hover:cursor-pointer hover:bg-pale-slate-100 focus:outline-none focus:ring-4 focus:ring-pale-slate-300 dark:border-dim-grey-700 dark:bg-dim-grey-900 dark:text-pale-slate-100 dark:shadow-black-cherry-950/30 dark:hover:bg-dim-grey-800 dark:focus:ring-dim-grey-700 ${className}`}
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
     >
       <span aria-hidden="true">{isDark ? "☀" : "◐"}</span>

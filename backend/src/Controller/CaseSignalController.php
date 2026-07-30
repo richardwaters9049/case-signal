@@ -7,12 +7,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Service\WorkflowCaseStore;
 
 final class CaseSignalController
 {
     private const DEMO_EMAIL = 'richard@casesignal.local';
     private const DEMO_PASSWORD_HASH = '$argon2id$v=19$m=65536,t=4,p=1$RjdnMG1CZGFrMVpTN2lIZg$+S7llJgLq+ZcaypWD8R5B75xJiMmoAP4285l8oEEHmc';
     private const SESSION_USER_KEY = 'casesignal.user';
+
+    public function __construct(private readonly WorkflowCaseStore $caseStore)
+    {
+    }
 
     #[Route('/api/v1/auth/login', name: 'api_auth_login', methods: ['POST', 'OPTIONS'])]
     public function login(Request $request): JsonResponse
@@ -83,25 +88,59 @@ final class CaseSignalController
             return $this->problem('authentication_required', 'Sign in to access the dashboard.', Response::HTTP_UNAUTHORIZED);
         }
 
-        return $this->response([
-            'generatedAt' => (new \DateTimeImmutable())->format(DATE_ATOM),
-            'metrics' => [
-                ['label' => 'Awaiting review', 'value' => 12, 'change' => '+3 today', 'tone' => 'amber'],
-                ['label' => 'SLA risk', 'value' => 3, 'change' => 'Needs attention', 'tone' => 'rose'],
-                ['label' => 'Resolved today', 'value' => 28, 'change' => '+18% this week', 'tone' => 'emerald'],
-                ['label' => 'Workflow health', 'value' => '98.7%', 'change' => 'Last 24 hours', 'tone' => 'indigo'],
-            ],
-            'exceptions' => [
-                ['id' => 'CS-1042', 'title' => 'Missing policy number', 'customer' => 'Harper & Co', 'workflow' => 'Repair request intake', 'reason' => 'Required evidence is missing from the email and attachment.', 'priority' => 'High', 'owner' => 'Unassigned', 'age' => '18 minutes', 'status' => 'Awaiting review'],
-                ['id' => 'CS-1039', 'title' => 'Approval threshold exceeded', 'customer' => 'Northstar Insurance', 'workflow' => 'Estimate validation', 'reason' => 'Estimated repair value exceeds the configured approval threshold.', 'priority' => 'High', 'owner' => 'Maya Singh', 'age' => '42 minutes', 'status' => 'Awaiting decision'],
-                ['id' => 'CS-1037', 'title' => 'Low extraction confidence', 'customer' => 'Wellington Services', 'workflow' => 'Document intake', 'reason' => 'The extracted claim reference scored below the human-review threshold.', 'priority' => 'Medium', 'owner' => 'Richard Waters', 'age' => '1 hour', 'status' => 'In review'],
-            ],
-            'workflowRuns' => [
-                ['name' => 'Repair request intake', 'completed' => 146, 'exceptions' => 4],
-                ['name' => 'Document intake', 'completed' => 118, 'exceptions' => 6],
-                ['name' => 'Estimate validation', 'completed' => 84, 'exceptions' => 2],
-            ],
-        ]);
+        return $this->response($this->caseStore->dashboard($request->getSession()));
+    }
+
+    #[Route('/api/v1/cases/{caseId}', name: 'api_case_detail', methods: ['GET', 'OPTIONS'])]
+    public function caseDetail(Request $request, string $caseId): JsonResponse
+    {
+        if ($request->isMethod('OPTIONS')) {
+            return $this->response(null, Response::HTTP_NO_CONTENT);
+        }
+
+        if ($this->authenticatedUser($request->getSession()) === null) {
+            return $this->problem('authentication_required', 'Sign in to view this case.', Response::HTTP_UNAUTHORIZED);
+        }
+
+        $case = $this->caseStore->find($request->getSession(), $caseId);
+        if ($case === null) {
+            return $this->problem('case_not_found', 'This case could not be found.', Response::HTTP_NOT_FOUND);
+        }
+
+        return $this->response(['case' => $case]);
+    }
+
+    #[Route('/api/v1/cases/{caseId}/actions', name: 'api_case_action', methods: ['POST', 'OPTIONS'])]
+    public function caseAction(Request $request, string $caseId): JsonResponse
+    {
+        if ($request->isMethod('OPTIONS')) {
+            return $this->response(null, Response::HTTP_NO_CONTENT);
+        }
+
+        $user = $this->authenticatedUser($request->getSession());
+        if ($user === null) {
+            return $this->problem('authentication_required', 'Sign in to update this case.', Response::HTTP_UNAUTHORIZED);
+        }
+
+        try {
+            $payload = $request->toArray();
+        } catch (\JsonException) {
+            return $this->problem('invalid_request', 'Provide a valid workflow action.', Response::HTTP_BAD_REQUEST);
+        }
+
+        $action = $payload['action'] ?? null;
+        $note = $payload['note'] ?? '';
+        if (!is_string($action) || !is_string($note) || mb_strlen($note) > 500) {
+            return $this->problem('invalid_request', 'Provide a supported action and a rationale of up to 500 characters.', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        try {
+            return $this->response($this->caseStore->action($request->getSession(), $caseId, $action, trim($note), $user));
+        } catch (\InvalidArgumentException $exception) {
+            return $this->problem('case_not_found', $exception->getMessage(), Response::HTTP_NOT_FOUND);
+        } catch (\LogicException $exception) {
+            return $this->problem('invalid_transition', $exception->getMessage(), Response::HTTP_CONFLICT);
+        }
     }
 
     #[Route('/health', name: 'health_check', methods: ['GET'])]
