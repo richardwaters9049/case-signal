@@ -31,19 +31,19 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col">
+        <Script id="theme-preference" strategy="beforeInteractive">{`
+          try {
+            const storedTheme = localStorage.getItem("casesignal.theme");
+            const useDarkTheme = storedTheme ? storedTheme === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+            document.documentElement.classList.toggle("dark", useDarkTheme);
+            document.documentElement.style.colorScheme = useDarkTheme ? "dark" : "light";
+          } catch {
+            document.documentElement.classList.toggle("dark", window.matchMedia("(prefers-color-scheme: dark)").matches);
+          }
+        `}</Script>
         {children}
         <ThemeToggle />
       </body>
-      <Script id="theme-preference" strategy="beforeInteractive">{`
-        try {
-          const storedTheme = localStorage.getItem("casesignal.theme");
-          const useDarkTheme = storedTheme ? storedTheme === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-          document.documentElement.classList.toggle("dark", useDarkTheme);
-          document.documentElement.style.colorScheme = useDarkTheme ? "dark" : "light";
-        } catch {
-          document.documentElement.classList.toggle("dark", window.matchMedia("(prefers-color-scheme: dark)").matches);
-        }
-      `}</Script>
     </html>
   );
 }
