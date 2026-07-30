@@ -14,6 +14,7 @@ The API uses `application/problem+json` for errors. A response contains a safe u
 - Invalid AI output, missing provenance and low-confidence extraction create a human-review exception rather than an automated approval.
 - Transient provider, queue, storage and database failures are retried with bounded exponential back-off. Exhausted jobs go to a dead-letter queue and alert the team.
 - Repeated requests are rate limited with `429` and clear retry guidance.
+- Unauthenticated dashboard requests return a safe `401` problem response; the frontend returns the operator to the sign-in page without exposing protected case data.
 
 ## Observability
 

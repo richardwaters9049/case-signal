@@ -1,11 +1,66 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --background: #f0f5f0;
+  --foreground: #141f14;
 }
 
 @theme inline {
+  --color-onyx-50: #f0f5f0;
+  --color-onyx-100: #e0ebe0;
+  --color-onyx-200: #c2d6c2;
+  --color-onyx-300: #a3c2a3;
+  --color-onyx-400: #85ad85;
+  --color-onyx-500: #669966;
+  --color-onyx-600: #527a52;
+  --color-onyx-700: #3d5c3d;
+  --color-onyx-800: #293d29;
+  --color-onyx-900: #141f14;
+  --color-onyx-950: #0e150e;
+  --color-brick-ember-50: #ffe6e8;
+  --color-brick-ember-100: #ffccd1;
+  --color-brick-ember-200: #fe9aa4;
+  --color-brick-ember-300: #fe6776;
+  --color-brick-ember-400: #fe3448;
+  --color-brick-ember-500: #fe011b;
+  --color-brick-ember-600: #cb0115;
+  --color-brick-ember-700: #980110;
+  --color-brick-ember-800: #65010b;
+  --color-brick-ember-900: #330005;
+  --color-brick-ember-950: #240004;
+  --color-dim-grey-50: #f2f2f3;
+  --color-dim-grey-100: #e4e6e7;
+  --color-dim-grey-200: #cacdce;
+  --color-dim-grey-300: #afb3b6;
+  --color-dim-grey-400: #959a9d;
+  --color-dim-grey-500: #7a8185;
+  --color-dim-grey-600: #62676a;
+  --color-dim-grey-700: #494d50;
+  --color-dim-grey-800: #313435;
+  --color-dim-grey-900: #181a1b;
+  --color-dim-grey-950: #111213;
+  --color-ash-grey-50: #f0f4f4;
+  --color-ash-grey-100: #e2e9e9;
+  --color-ash-grey-200: #c4d4d3;
+  --color-ash-grey-300: #a7bebc;
+  --color-ash-grey-400: #8aa8a6;
+  --color-ash-grey-500: #6c9390;
+  --color-ash-grey-600: #577573;
+  --color-ash-grey-700: #415856;
+  --color-ash-grey-800: #2b3b3a;
+  --color-ash-grey-900: #161d1d;
+  --color-ash-grey-950: #0f1514;
+  --color-ghost-white-50: #f0eff5;
+  --color-ghost-white-100: #e1dfec;
+  --color-ghost-white-200: #c3bfd9;
+  --color-ghost-white-300: #a49fc6;
+  --color-ghost-white-400: #8680b3;
+  --color-ghost-white-500: #68609f;
+  --color-ghost-white-600: #534d80;
+  --color-ghost-white-700: #3e3960;
+  --color-ghost-white-800: #2a2640;
+  --color-ghost-white-900: #151320;
+  --color-ghost-white-950: #0f0d16;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);

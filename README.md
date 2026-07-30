@@ -22,6 +22,13 @@ This starts the frontend, Symfony API, PostgreSQL and Redis. Source folders are 
 
 ## Current slice
 
-The initial vertical slice exposes a Symfony dashboard endpoint and an accessible Next.js dashboard showing exception work, workflow health and an exception queue. It intentionally uses synthetic data while the PostgreSQL persistence and Symfony Messenger work are built next.
+The initial vertical slice includes a Symfony session-authentication API, a landing-page login form, and a protected Next.js dashboard showing the authenticated user, exception work, workflow health and an interactive queue filter. It intentionally uses synthetic workflow data while PostgreSQL persistence and Symfony Messenger work are built next.
+
+## Demonstration sign in
+
+- Email: `richard@casesignal.local`
+- Password: `CaseSignal2026!`
+
+The demonstration account is verified server-side with Argon2id and stored in a server-side Symfony session. It exists only for this portfolio environment; production credentials must be persisted securely and use rate limiting, account recovery and multi-factor authentication as appropriate.
 
 Read [the product plan](PROJECT_PLAN.md), [local development guide](docs/local-development.md), [error-handling approach](docs/error-handling.md), and [contribution expectations](CONTRIBUTING.md).
