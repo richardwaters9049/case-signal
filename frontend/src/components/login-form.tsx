@@ -42,20 +42,20 @@ export function LoginForm() {
   }
 
   return (
-    <main className="min-h-screen bg-onyx-950 px-6 py-10 text-onyx-900">
-      <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-6xl overflow-hidden rounded-3xl bg-ghost-white-50 shadow-2xl shadow-onyx-950/40 lg:grid-cols-[1.1fr_0.9fr]">
-        <section className="relative overflow-hidden bg-onyx-800 p-8 text-onyx-50 sm:p-12">
-          <div className="absolute -top-24 -right-12 h-72 w-72 rounded-full bg-onyx-500/30 blur-3xl" />
+    <main className="min-h-screen bg-dim-grey-950 px-6 py-10 text-dim-grey-900">
+      <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-6xl overflow-hidden rounded-3xl bg-ghost-white-50 shadow-2xl shadow-dim-grey-950/40 lg:grid-cols-[1.1fr_0.9fr]">
+        <section className="relative overflow-hidden bg-dim-grey-900 p-8 text-dim-grey-50 sm:p-12">
+          <div className="absolute -top-24 -right-12 h-72 w-72 rounded-full bg-ash-grey-500/30 blur-3xl" />
           <div className="absolute -bottom-28 -left-16 h-72 w-72 rounded-full bg-ash-grey-400/20 blur-3xl" />
           <div className="relative flex h-full flex-col justify-between">
             <div>
-              <p className="text-sm font-semibold tracking-[0.2em] text-onyx-200 uppercase">
+              <p className="text-sm font-semibold tracking-[0.2em] text-ash-grey-200 uppercase">
                 CaseSignal
               </p>
               <h1 className="mt-8 max-w-md text-4xl font-semibold tracking-tight sm:text-5xl">
                 When automation pauses, your team stays in control.
               </h1>
-              <p className="mt-6 max-w-lg text-lg leading-8 text-onyx-100">
+              <p className="mt-6 max-w-lg text-lg leading-8 text-dim-grey-100">
                 Review signals, resolve exceptions and keep operational
                 workflows moving with a complete audit trail.
               </p>
@@ -74,7 +74,7 @@ export function LoginForm() {
             transition={{ duration: 0.28 }}
             className="mx-auto w-full max-w-sm"
           >
-            <p className="text-sm font-semibold tracking-[0.16em] text-onyx-700 uppercase">
+            <p className="text-sm font-semibold tracking-[0.16em] text-ash-grey-700 uppercase">
               Operator sign in
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight">
@@ -93,7 +93,7 @@ export function LoginForm() {
                   autoComplete="email"
                   type="email"
                   required
-                  className="mt-2 w-full rounded-xl border border-ash-grey-300 bg-ghost-white-50 px-3 py-3 outline-none transition focus:border-onyx-600 focus:ring-4 focus:ring-onyx-100"
+                  className="mt-2 w-full rounded-xl border border-ash-grey-300 bg-ghost-white-50 px-3 py-3 outline-none transition focus:border-ash-grey-600 focus:ring-4 focus:ring-ash-grey-100"
                 />
               </label>
               <label className="block text-sm font-medium">
@@ -104,7 +104,7 @@ export function LoginForm() {
                   autoComplete="current-password"
                   type="password"
                   required
-                  className="mt-2 w-full rounded-xl border border-ash-grey-300 bg-ghost-white-50 px-3 py-3 outline-none transition focus:border-onyx-600 focus:ring-4 focus:ring-onyx-100"
+                  className="mt-2 w-full rounded-xl border border-ash-grey-300 bg-ghost-white-50 px-3 py-3 outline-none transition focus:border-ash-grey-600 focus:ring-4 focus:ring-ash-grey-100"
                 />
               </label>
               {error ? (
@@ -118,7 +118,7 @@ export function LoginForm() {
               <button
                 disabled={isSubmitting}
                 type="submit"
-                className="w-full rounded-xl bg-onyx-700 px-4 py-3 font-semibold text-onyx-50 transition hover:bg-onyx-800 focus:outline-none focus:ring-4 focus:ring-onyx-200 disabled:cursor-wait disabled:opacity-70 hover:cursor-pointer"
+                className="w-full rounded-xl bg-dim-grey-900 px-4 py-3 font-semibold text-dim-grey-50 transition hover:bg-dim-grey-800 focus:outline-none focus:ring-4 focus:ring-dim-grey-200 disabled:cursor-wait disabled:opacity-70 hover:cursor-pointer"
               >
                 {isSubmitting ? "Signing in…" : "Sign in to CaseSignal"}
               </button>
@@ -137,8 +137,8 @@ export function LoginForm() {
 
 function Value({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-onyx-300/20 bg-onyx-50/10 p-4 backdrop-blur-sm">
-      <p className="text-xs font-semibold tracking-[0.12em] text-onyx-200 uppercase">
+    <div className="rounded-2xl border border-ash-grey-300/20 bg-ash-grey-50/10 p-4 backdrop-blur-sm">
+      <p className="text-xs font-semibold tracking-[0.12em] text-ash-grey-200 uppercase">
         {label}
       </p>
       <p className="mt-2 font-semibold">{value}</p>

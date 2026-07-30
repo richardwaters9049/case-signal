@@ -101,11 +101,11 @@ export function Dashboard() {
 
   if (!data || !user) return <DashboardSkeleton error={error} />;
   return (
-    <main className="min-h-screen bg-onyx-50 text-onyx-900">
+    <main className="min-h-screen bg-dim-grey-50 text-dim-grey-900">
       <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
-        <header className="mb-10 flex flex-col gap-6 border-b border-onyx-200 pb-8 sm:flex-row sm:items-center sm:justify-between">
+        <header className="mb-10 flex flex-col gap-6 border-b border-ash-grey-200 pb-8 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="mb-2 text-sm font-semibold tracking-[0.18em] text-onyx-700 uppercase">
+            <p className="mb-2 text-sm font-semibold tracking-[0.18em] text-ash-grey-700 uppercase">
               CaseSignal
             </p>
             <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -117,7 +117,7 @@ export function Dashboard() {
             </p>
           </div>
           <div className="flex items-center gap-3 rounded-2xl border border-ash-grey-200 bg-ghost-white-50 p-3 shadow-sm">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-onyx-100 text-sm font-bold text-onyx-700">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ash-grey-100 text-sm font-bold text-ash-grey-700">
               {user.initials}
             </span>
             <div className="min-w-0">
@@ -126,7 +126,7 @@ export function Dashboard() {
             </div>
             <button
               onClick={() => void logout()}
-              className="ml-2 rounded-lg px-2 py-1 text-sm font-medium text-dim-grey-600 hover:cursor-pointer hover:bg-onyx-100 hover:text-onyx-950"
+              className="ml-2 rounded-lg px-2 py-1 text-sm font-medium text-dim-grey-600 hover:cursor-pointer hover:bg-dim-grey-100 hover:text-dim-grey-950"
             >
               Sign out
             </button>
@@ -185,7 +185,7 @@ export function Dashboard() {
                   <button
                     key={value}
                     onClick={() => setFilter(value)}
-                    className={`rounded-md px-3 py-1.5 font-medium transition ${filter === value ? "bg-ghost-white-50 text-onyx-700 shadow-sm" : "text-dim-grey-600 hover:cursor-pointer hover:text-onyx-950 hover:underline hover:underline-offset-2"}`}
+                    className={`rounded-md px-3 py-1.5 font-medium transition ${filter === value ? "bg-ghost-white-50 text-dim-grey-900 shadow-sm" : "text-dim-grey-600 hover:cursor-pointer hover:text-dim-grey-950 hover:underline hover:underline-offset-2"}`}
                   >
                     {label}
                   </button>
@@ -197,7 +197,7 @@ export function Dashboard() {
                 exceptions.map((exception) => (
                   <article
                     key={exception.id}
-                    className="px-6 py-5 transition-colors hover:bg-onyx-50"
+                    className="px-6 py-5 transition-colors hover:bg-dim-grey-50"
                   >
                     <div className="flex flex-col justify-between gap-4 sm:flex-row">
                       <div>
@@ -248,7 +248,7 @@ export function Dashboard() {
                   </div>
                   <div className="mt-2 h-2 overflow-hidden rounded-full bg-ash-grey-100">
                     <div
-                      className="h-full rounded-full bg-onyx-600"
+                      className="h-full rounded-full bg-ash-grey-600"
                       style={{
                         width: `${Math.min(100, 100 - workflow.exceptions * 5)}%`,
                       }}
@@ -261,9 +261,9 @@ export function Dashboard() {
                 </div>
               ))}
             </div>
-            <div className="mt-8 rounded-xl bg-onyx-950 p-4 text-onyx-50">
+            <div className="mt-8 rounded-xl bg-dim-grey-950 p-4 text-dim-grey-50">
               <p className="text-sm font-semibold">Guardrail active</p>
-              <p className="mt-1 text-sm leading-6 text-onyx-200">
+              <p className="mt-1 text-sm leading-6 text-dim-grey-200">
                 Low-confidence extraction and approval-threshold decisions
                 remain with a person.
               </p>
@@ -277,7 +277,7 @@ export function Dashboard() {
 
 function DashboardSkeleton({ error }: { error: string | null }) {
   return (
-    <main className="min-h-screen bg-onyx-50 px-6 py-8">
+    <main className="min-h-screen bg-dim-grey-50 px-6 py-8">
       <div className="mx-auto max-w-7xl">
         {error ? (
           <p
