@@ -37,4 +37,8 @@ Use **Reset demo** in the signed-in operator panel to restore the original fixtu
 
 The demonstration account is verified server-side with Argon2id and stored in a server-side Symfony session. It exists only for this portfolio environment; production credentials must be persisted securely and use rate limiting, account recovery and multi-factor authentication as appropriate.
 
+## Testing
+
+CaseSignal employs a comprehensive testing strategy covering unit, integration, API, UI, end-to-end, performance, load, security, regression, MQTT, failure scenarios, observability, and AI evaluation. The testing approach follows a pyramid model with 60% unit tests, 30% integration tests, and 10% E2E tests, ensuring quality at every layer. For detailed testing documentation, methodologies, and examples, see the [testing documentation](docs/testing-documentation).
+
 Read [the product plan](PROJECT_PLAN.md), [frontend guide](frontend/README.md), [local development guide](docs/local-development.md), [API guide](docs/api.md), [error-handling approach](docs/error-handling.md), [testing guide](docs/testing.md), and [contribution expectations](CONTRIBUTING.md).
