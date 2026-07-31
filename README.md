@@ -4,6 +4,18 @@ CaseSignal is an exception-control workspace for service operations. It makes wo
 
 It is a portfolio project tailored to demonstrate PHP/Symfony, Next.js, workflow automation, auditability, operational resilience and guarded AI integration.
 
+## Table of Contents
+
+- [CaseSignal](#casesignal)
+  - [Table of Contents](#table-of-contents)
+  - [Technology](#technology)
+  - [Run locally](#run-locally)
+  - [Current slice](#current-slice)
+  - [Demonstration fixtures](#demonstration-fixtures)
+  - [Demonstration sign in](#demonstration-sign-in)
+  - [Testing](#testing)
+  - [Documentation](#documentation)
+
 ## Technology
 
 - `backend/`: PHP 8.4 and Symfony 8 JSON API.
@@ -41,4 +53,12 @@ The demonstration account is verified server-side with Argon2id and stored in a 
 
 CaseSignal employs a comprehensive testing strategy covering unit, integration, API, UI, end-to-end, performance, load, security, regression, MQTT, failure scenarios, observability, and AI evaluation. The testing approach follows a pyramid model with 60% unit tests, 30% integration tests, and 10% E2E tests, ensuring quality at every layer. For detailed testing documentation, methodologies, and examples, see the [testing documentation](docs/testing-documentation).
 
-Read [the product plan](PROJECT_PLAN.md), [frontend guide](frontend/README.md), [local development guide](docs/local-development.md), [API guide](docs/api.md), [error-handling approach](docs/error-handling.md), [testing guide](docs/testing.md), and [contribution expectations](CONTRIBUTING.md).
+## Documentation
+
+- [Product plan](PROJECT_PLAN.md)
+- [Frontend guide](frontend/README.md)
+- [Local development guide](docs/local-development.md)
+- [API guide](docs/api.md)
+- [Error-handling approach](docs/error-handling.md)
+- [Testing guide](docs/testing.md)
+- [Contribution expectations](CONTRIBUTING.md)
